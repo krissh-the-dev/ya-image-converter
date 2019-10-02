@@ -1,14 +1,83 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import yac.toBW;
 import yac.toGrayscale;
+/*
+class toBW {
+  public static void convert(String path) {
+    try {
+        File input = new File(path);
+        BufferedImage image = ImageIO.read(input);
 
+        BufferedImage result = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
+
+        Graphics2D graphic = result.createGraphics();
+        graphic.drawImage(image, 0, 0, Color.WHITE, null);
+        graphic.dispose();
+        // thanks to tutorialspoint for conversion algorithm
+
+        File output = new File(path + "-bw.jpeg");
+        ImageIO.write(result, "jpeg", output);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+  }
+}
+
+class toGrayscale {
+  public static void convert(String path) {
+    BufferedImage img = null;
+    File colored = null;
+    try{
+      colored = new File(path);
+      img = ImageIO.read(colored);
+    } catch(IOException e){
+        System.out.println(e);
+      }
+
+    int width = img.getWidth();
+    int height = img.getHeight();
+
+    for(int y = 0; y < height; y++){
+      for(int x = 0; x < width; x++){
+        int p = img.getRGB(x,y);
+
+        int a = (p>>24)&0xff;
+        int r = (p>>16)&0xff;
+        int g = (p>>8)&0xff;
+        int b = p&0xff;
+
+        int avg = (r+g+b)/3;
+
+        p = (a<<24) | (avg<<16) | (avg<<8) | avg;
+
+        img.setRGB(x, y, p);
+      }
+    }
+
+    // thanks to stackoverflow for image conversion algorithm
+
+    try {
+      colored = new File(path + "-grayscale.jpg");
+      ImageIO.write(img, "jpg", colored);
+    } catch(IOException e){
+      System.out.println(e);
+    }
+  }
+}
+
+*/
 class yaconverter {
   static JTextField pathField;
   static JLabel status;
   static JButton tobw, togs;
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         JFrame frame = new JFrame("Ya Converter");
 
         frame.setSize(400, 400);
@@ -60,6 +129,8 @@ class yaconverter {
 class ButtonListener extends yaconverter implements ActionListener {
   public void actionPerformed(ActionEvent ae) {
     String path = pathField.getText();
+    status.setText(path);
+    System.out.println(path);
     try {
       if (ae.getSource() == tobw) {
         toBW.convert(path);
@@ -69,9 +140,9 @@ class ButtonListener extends yaconverter implements ActionListener {
         toGrayscale.convert(path);
         status.setText("Converted to grayscale.");
       }
-
       else {}
-      Thread.sleep(2000);
+
+      // Thread.sleep(2000);
       status.setText("Image saved to /outputs.");
     } catch (Exception e) {
       status.setText("Error converting the file.");

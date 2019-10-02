@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class toBW {
   public static void convert(String path) {
-    path = "..\\" + path;
+    //path = "..\\" + path;
     try {
         File input = new File(path);
         BufferedImage image = ImageIO.read(input);
@@ -20,12 +20,10 @@ public class toBW {
         graphic.dispose();
         // thanks to tutorialspoint for conversion algorithm
 
-        File output = new File("outputs\\" + path + "-bw.jpeg");
+        File output = new File(path + "-bw.jpeg");
         ImageIO.write(result, "jpeg", output);
     } catch (IOException e) {
         e.printStackTrace();
-    } catch(ArrayIndexOutOfBoundsException aob) {
-        System.out.println("Please provide command-line arguments.");
     }
   }
 }

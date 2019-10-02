@@ -10,7 +10,6 @@ public class toGrayscale {
   public static void convert(String path) {
     BufferedImage img = null;
     File colored = null;
-    path = "..\\" + path;
     try{
       colored = new File(path);
       img = ImageIO.read(colored);
@@ -40,10 +39,10 @@ public class toGrayscale {
 
     // thanks to stackoverflow for image conversion algorithm
 
-    try{
-      colored = new File("outputs\\" + path + "-grayscale.jpg");
+    try {
+      colored = new File(path + "-grayscale.jpg");
       ImageIO.write(img, "jpg", colored);
-    }catch(IOException e){
+    } catch(IOException e){
       System.out.println(e);
     }
   }
