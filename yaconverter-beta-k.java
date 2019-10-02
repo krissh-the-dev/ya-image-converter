@@ -10,13 +10,13 @@ import java.io.IOException;
 import yac.toBW;
 import yac.toGrayscale;
 
-class yaconverter {
+class yaconverter{
+  static JFrame frame = new JFrame("Ya Converter");
   static JTextField pathField;
   static JLabel status, img;
   static JButton tobw, togs;
+  static JPanel imageViewer = new JPanel();
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Ya Converter");
-
         frame.setSize(550, 670);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,11 +27,10 @@ class yaconverter {
         mb.add(m1);
 
         // Panels
-        JPanel imageViewer = new JPanel();
         JPanel mainPanel = new JPanel();
         JPanel statusBar = new JPanel();
 
-        ImageIcon ic = new ImageIcon("sample.jpeg");
+        ImageIcon ic = new ImageIcon("raw\\logo.png");
         JLabel label = new JLabel("File path: ");
         pathField = new JTextField(30);
         JButton browse = new JButton("Browse");
@@ -79,28 +78,38 @@ class yaconverter {
 class ButtonListener extends yaconverter implements ActionListener {
   public void actionPerformed(ActionEvent ae) {
     String path = pathField.getText();
+
     if (path.equals("")){
       status.setText("Choose a file to convert.");
       return;
     }
     if (!(new File(path).exists()))
       status.setText("File does not exist!");
-    //status.setText(path);
-    //System.out.println(path);
+
     try {
+      File op = null;
+      String conv = "";
       BufferedImage image = ImageIO.read(new File(path));
       if (ae.getSource() == tobw) {
-        toBW.convert(path);
+        op = toBW.convert(path);
+        conv = path + "-bw.jpeg";
         status.setText("Converted to black and white.");
       }
       else if (ae.getSource() == togs) {
-        toGrayscale.convert(path);
+        op =toGrayscale.convert(path);
+        conv = path + "-grayscale.jpeg";
         status.setText("Converted to grayscale.");
       }
       else {}
 
-      // Thread.sleep(2000);
-      status.setText("Image saved as " + path + ".");
+      if (op == null)
+        status.setText("Error converting file.");
+      else{
+        img = new JLabel(new ImageIcon(path));
+        imageViewer.add(img);
+        frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
+        status.setText("Image saved as " + conv + ".");
+      }
     } catch(javax.imageio.IIOException iioe) {
       status.setText("File not found.");
     } catch (Exception e) {
