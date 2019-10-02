@@ -31,7 +31,7 @@ class yaconverter {
         JPanel mainPanel = new JPanel();
         JPanel statusBar = new JPanel();
 
-        ImageIcon ic = new ImageIcon("logo.png");
+        ImageIcon ic = new ImageIcon("sample.jpeg");
         JLabel label = new JLabel("File path: ");
         pathField = new JTextField(30);
         JButton browse = new JButton("Browse");
