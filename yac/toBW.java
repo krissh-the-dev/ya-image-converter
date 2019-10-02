@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class toBW {
-  public static void convert(String path) {
+  public static File convert(String path) {
     BufferedImage image = null;
     try {
         File input = new File(path);
@@ -22,8 +22,10 @@ public class toBW {
 
         File output = new File(path + "-bw.jpeg");
         ImageIO.write(result, "jpeg", output);
+        return (output);
     } catch (IOException e) {
         e.printStackTrace();
     }
+    return null;
   }
 }

@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class toGrayscale {
-  public static void convert(String path) {
+  public static File convert(String path) {
     BufferedImage img = null;
     File colored = null;
     try{
@@ -40,10 +40,12 @@ public class toGrayscale {
     // thanks to stackoverflow for image conversion algorithm
 
     try {
-      colored = new File(path + "-grayscale.jpg");
-      ImageIO.write(img, "jpg", colored);
+      File gs = new File(path + "-grayscale.jpg");
+      ImageIO.write(img, "jpg", gs);
+      return gs;
     } catch(IOException e){
       System.out.println(e);
     }
+    return null;
   }
 }
