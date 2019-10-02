@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Dimension;
+import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,40 +13,51 @@ import yac.toGrayscale;
 class yaconverter {
   static JTextField pathField;
   static JLabel status;
+  static ImageIcon ic;
   static JButton tobw, togs;
     public static void main(String[] args) {
         JFrame frame = new JFrame("Ya Converter");
 
-        frame.setSize(400, 400);
-        frame.setResizable(true);
+        frame.setSize(550, 670);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Menu bar
         JMenuBar mb = new JMenuBar();
         JMenu m1 = new JMenu("About");
         mb.add(m1);
 
-        JPanel panel = new JPanel();
+        // Panels
+        JPanel imageViewer = new JPanel();
+        JPanel mainPanel = new JPanel();
         JPanel statusBar = new JPanel();
 
+        ImageIcon ic = new ImageIcon("sample.jpeg");
         JLabel label = new JLabel("File path: ");
-        pathField = new JTextField(25);
+        pathField = new JTextField(30);
         JButton browse = new JButton("Browse");
         tobw = new JButton("Convert into B/W");
         togs = new JButton("Convert into GrayScale");
+
+
+        // Image Viewer
+        imageViewer.setSize(300, 300);
+        imageViewer.add(new JLabel(ic));
+
+
+        // Main panel
+        mainPanel.setLayout(new FlowLayout());
+        mainPanel.add(label);
+        mainPanel.add(pathField);
+        mainPanel.add(browse);
+        mainPanel.add(tobw);
+        mainPanel.add(togs);
 
         // Status Bar
         statusBar.setLayout(new FlowLayout(FlowLayout.LEFT));
         status = new JLabel("Ready");
 
         statusBar.add(status);
-
-        // Main panel
-        panel.setLayout(new FlowLayout());
-        panel.add(label);
-        panel.add(pathField);
-        panel.add(browse);
-        panel.add(tobw);
-        panel.add(togs);
 
 
         frame.setLayout(new BorderLayout());
@@ -53,8 +66,9 @@ class yaconverter {
         tobw.addActionListener(new ButtonListener());
         togs.addActionListener(new ButtonListener());
 
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
         frame.getContentPane().add(mb, BorderLayout.NORTH);
+        frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
+        frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         frame.getContentPane().add(statusBar, BorderLayout.SOUTH);
 
         frame.setVisible(true);
