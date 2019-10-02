@@ -7,18 +7,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class toGrayscale {
-  toGrayscale(String path) {
+  public static void convert(String path) {
     BufferedImage img = null;
     File colored = null;
-
+    path = "..\\" + path;
     try{
       colored = new File(path);
       img = ImageIO.read(colored);
     } catch(IOException e){
         System.out.println(e);
-    } catch (ArrayIndexOutOfBoundsException aoe) {
-        System.out.println("Please give command-line arguments.");
-    }
+      }
 
     int width = img.getWidth();
     int height = img.getHeight();

@@ -40,7 +40,7 @@ class YAGrayscale{
     // thanks to stackoverflow for image conversion algorithms
 
     try{
-      colored = new File("outputs\\" + args[0] + "-grayscale.jpg");
+      colored = new File("\\outputs\\raw\\" + args[0] + "-grayscale.jpg");
       ImageIO.write(img, "jpg", colored);
     }catch(IOException e){
       System.out.println(e);

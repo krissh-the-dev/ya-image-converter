@@ -6,6 +6,8 @@ import yac.toGrayscale;
 
 class yaconverter {
   static JTextField pathField;
+  static JLabel status;
+  static JButton tobw, togs;
     public static void main(String args[]) {
         JFrame frame = new JFrame("Ya Converter");
 
@@ -18,25 +20,38 @@ class yaconverter {
         mb.add(m1);
 
         JPanel panel = new JPanel();
+        JPanel statusBar = new JPanel();
+
         JLabel label = new JLabel("File path: ");
         pathField = new JTextField(25);
         JButton browse = new JButton("Browse");
-        JButton tobw = new JButton("Convert into B/W");
-        JButton togs = new JButton("Convert into GrayScale");
+        tobw = new JButton("Convert into B/W");
+        togs = new JButton("Convert into GrayScale");
+
+        // Status Bar
+        statusBar.setLayout(new FlowLayout(FlowLayout.LEFT));
+        status = new JLabel("Ready");
+
+        statusBar.add(status);
+
+        // Main panel
         panel.setLayout(new FlowLayout());
         panel.add(label);
         panel.add(pathField);
         panel.add(browse);
         panel.add(tobw);
         panel.add(togs);
+
+
         frame.setLayout(new BorderLayout());
 
+        // Action Handling
         tobw.addActionListener(new ButtonListener());
         togs.addActionListener(new ButtonListener());
 
-        //Adding Components to the frame.
         frame.getContentPane().add(panel, BorderLayout.CENTER);
         frame.getContentPane().add(mb, BorderLayout.NORTH);
+        frame.getContentPane().add(statusBar, BorderLayout.SOUTH);
 
         frame.setVisible(true);
     }
@@ -44,6 +59,22 @@ class yaconverter {
 
 class ButtonListener extends yaconverter implements ActionListener {
   public void actionPerformed(ActionEvent ae) {
-    pathField.setText("OK");
+    String path = pathField.getText();
+    try {
+      if (ae.getSource() == tobw) {
+        toBW.convert(path);
+        status.setText("Converted to black and white.");
+      }
+      else if (ae.getSource() == togs) {
+        toGrayscale.convert(path);
+        status.setText("Converted to grayscale.");
+      }
+
+      else {}
+      Thread.sleep(2000);
+      status.setText("Image saved to /outputs.");
+    } catch (Exception e) {
+      status.setText("Error converting the file.");
+    }
   }
 }

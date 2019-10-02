@@ -7,7 +7,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class toBW {
-  toBW(String path) {
+  public static void convert(String path) {
+    path = "\\" + path;
     try {
         File input = new File(path);
         BufferedImage image = ImageIO.read(input);

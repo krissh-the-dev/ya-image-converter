@@ -19,7 +19,7 @@ class YAConverter {
             graphic.drawImage(image, 0, 0, Color.WHITE, null);
             graphic.dispose();
 
-            File output = new File("outputs\\" + args[0] + "-bw.jpeg");
+            File output = new File("\\outputs\\raw\\" + args[0] + "-bw.jpeg");
             ImageIO.write(result, "jpeg", output);
 
         }  catch (IOException e) {
