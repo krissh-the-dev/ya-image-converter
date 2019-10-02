@@ -8,10 +8,10 @@ import java.io.IOException;
 
 public class toBW {
   public static void convert(String path) {
-    //path = "..\\" + path;
+    BufferedImage image = null;
     try {
         File input = new File(path);
-        BufferedImage image = ImageIO.read(input);
+        image = ImageIO.read(input);
 
         BufferedImage result = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_BYTE_BINARY);
 
