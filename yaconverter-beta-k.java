@@ -12,7 +12,7 @@ import yac.toBW;
 import yac.toGrayscale;
 
 class yaconverter{
-  static JFrame frame = new JFrame("Ya Converter");
+  static JFrame frame = new JFrame("YA Converter");
   static JTextField pathField;
   static JLabel status, img;
   static JButton tobw, togs, browse;
@@ -29,10 +29,6 @@ class yaconverter{
         frame.setSize(550, 670);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Menu bar
-        JMenuBar mb = new JMenuBar();
-        JMenu m1 = new JMenu("About");
-        mb.add(m1);
 
         // Panels
         JPanel mainPanel = new JPanel();
@@ -77,7 +73,6 @@ class yaconverter{
         browse.addActionListener(new ButtonListener());
 
         // Adding to frame
-        frame.getContentPane().add(mb, BorderLayout.NORTH);
         frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         frame.getContentPane().add(statusBar, BorderLayout.SOUTH);
@@ -118,7 +113,7 @@ class ButtonListener extends yaconverter implements ActionListener {
         status.setText("Converted to black and white.");
       }
       else if (ae.getSource() == togs) {
-        op =toGrayscale.convert(path);
+        op = toGrayscale.convert(path);
         conv = path + "-grayscale.jpeg";
         status.setText("Converted to grayscale.");
       }
