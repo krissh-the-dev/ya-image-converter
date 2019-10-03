@@ -125,7 +125,7 @@ class ButtonListener extends yaconverter implements ActionListener {
       else {}
 
       if (op == null)
-        status.setText("Error converting file.");
+        status.setText("File chosen successfully.");
       else{
         imageViewer.remove(img);
         img = new JLabel(new ImageIcon(conv));
@@ -136,7 +136,7 @@ class ButtonListener extends yaconverter implements ActionListener {
     } catch(javax.imageio.IIOException iioe) {
       status.setText("File not found.");
     } catch (Exception e) {
-      status.setText("Error converting the file.");
+      status.setText("Error converting the file. The file is either not an image or currupted.");
     }
   }
 }
