@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Dimension;
 import java.awt.image.*;
+import javax.swing.filechooser.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -11,19 +12,23 @@ import yac.toBW;
 import yac.toGrayscale;
 
 class yaconverter{
-  static JFrame frame = new JFrame("Ya Converter");
+  static JFrame frame = new JFrame("YA Converter");
   static JTextField pathField;
   static JLabel status, img;
   static JButton tobw, togs, browse;
   static JPanel imageViewer = new JPanel();
     public static void main(String[] args) {
+      // Theming
+      try {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+      } catch(Exception looke) {
+        System.out.println("Look and feel error.");
+      }
+
+      // Frame settings
         frame.setSize(550, 670);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // Menu bar
-        JMenuBar mb = new JMenuBar();
-        JMenu m1 = new JMenu("About");
-        mb.add(m1);
 
         // Panels
         JPanel mainPanel = new JPanel();
@@ -32,7 +37,7 @@ class yaconverter{
         ImageIcon ic = new ImageIcon("raw\\logo.png");
         frame.setIconImage(ic.getImage());
         JLabel label = new JLabel("File path: ");
-        pathField = new JTextField(30);
+        pathField = new JTextField(45);
         browse = new JButton("Browse");
         tobw = new JButton("Convert into B/W");
         togs = new JButton("Convert into GrayScale");
@@ -65,8 +70,9 @@ class yaconverter{
         // Action Handling
         tobw.addActionListener(new ButtonListener());
         togs.addActionListener(new ButtonListener());
+        browse.addActionListener(new ButtonListener());
 
-        frame.getContentPane().add(mb, BorderLayout.NORTH);
+        // Adding to frame
         frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
         frame.getContentPane().add(statusBar, BorderLayout.SOUTH);
@@ -78,6 +84,17 @@ class yaconverter{
 class ButtonListener extends yaconverter implements ActionListener {
   public void actionPerformed(ActionEvent ae) {
     String path = pathField.getText();
+    JFileChooser bb = null;
+    int bbd = 0;
+    if(ae.getSource() == browse) {
+      bb = new JFileChooser(FileSystemView.getFileSystemView());
+      bbd = bb.showOpenDialog(null);
+
+      if (bbd == JFileChooser.APPROVE_OPTION) {
+          pathField.setText(bb.getSelectedFile().getAbsolutePath());
+          path = pathField.getText();
+      }
+    }
 
     if (path.equals("")){
       status.setText("Choose a file to convert.");
@@ -93,18 +110,15 @@ class ButtonListener extends yaconverter implements ActionListener {
       if (ae.getSource() == tobw) {
         op = toBW.convert(path);
         conv = path + "-bw.jpeg";
-        status.setText("Converted to black and white.");
       }
       else if (ae.getSource() == togs) {
-        op =toGrayscale.convert(path);
+        op = toGrayscale.convert(path);
         conv = path + "-grayscale.jpeg";
-        status.setText("Converted to grayscale.");
       }
-
       else {}
 
       if (op == null)
-        status.setText("Error converting file.");
+        status.setText("File chosen successfully.");
       else{
         imageViewer.remove(img);
         img = new JLabel(new ImageIcon(conv));
@@ -113,9 +127,9 @@ class ButtonListener extends yaconverter implements ActionListener {
         status.setText("Image saved as " + conv + ".");
       }
     } catch(javax.imageio.IIOException iioe) {
-      status.setText("File not found.");
+        status.setText("File not found.");
     } catch (Exception e) {
-      status.setText("Error converting the file.");
+        status.setText("Error converting the file. The file is either not an image or currupted.");
     }
   }
 }

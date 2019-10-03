@@ -110,12 +110,10 @@ class ButtonListener extends yaconverter implements ActionListener {
       if (ae.getSource() == tobw) {
         op = toBW.convert(path);
         conv = path + "-bw.jpeg";
-        status.setText("Converted to black and white.");
       }
       else if (ae.getSource() == togs) {
         op = toGrayscale.convert(path);
         conv = path + "-grayscale.jpeg";
-        status.setText("Converted to grayscale.");
       }
       else {}
 
@@ -129,9 +127,9 @@ class ButtonListener extends yaconverter implements ActionListener {
         status.setText("Image saved as " + conv + ".");
       }
     } catch(javax.imageio.IIOException iioe) {
-      status.setText("File not found.");
+        status.setText("File not found.");
     } catch (Exception e) {
-      status.setText("Error converting the file. The file is either not an image or currupted.");
+        status.setText("Error converting the file. The file is either not an image or currupted.");
     }
   }
 }
