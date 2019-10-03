@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.Dimension;
 import java.awt.image.*;
+import javax.swing.filechooser.*;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,7 +15,7 @@ class yaconverter{
   static JFrame frame = new JFrame("Ya Converter");
   static JTextField pathField;
   static JLabel status, img;
-  static JButton tobw, togs;
+  static JButton tobw, togs, browse;
   static JPanel imageViewer = new JPanel();
     public static void main(String[] args) {
         frame.setSize(550, 670);
@@ -33,7 +34,7 @@ class yaconverter{
         frame.setIconImage(ic.getImage());
         JLabel label = new JLabel("File path: ");
         pathField = new JTextField(30);
-        JButton browse = new JButton("Browse");
+        browse = new JButton("Browse");
         tobw = new JButton("Convert into B/W");
         togs = new JButton("Convert into GrayScale");
 
@@ -65,7 +66,9 @@ class yaconverter{
         // Action Handling
         tobw.addActionListener(new ButtonListener());
         togs.addActionListener(new ButtonListener());
+        browse.addActionListener(new ButtonListener());
 
+        // Adding to frame
         frame.getContentPane().add(mb, BorderLayout.NORTH);
         frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
         frame.getContentPane().add(mainPanel, BorderLayout.CENTER);
@@ -78,6 +81,17 @@ class yaconverter{
 class ButtonListener extends yaconverter implements ActionListener {
   public void actionPerformed(ActionEvent ae) {
     String path = pathField.getText();
+    JFileChooser bb = null;
+    int bbd = 0;
+    if(ae.getSource() == browse) {
+      bb = new JFileChooser(FileSystemView.getFileSystemView());
+      bbd = bb.showOpenDialog(null);
+
+      if (bbd == JFileChooser.APPROVE_OPTION) {
+          pathField.setText(bb.getSelectedFile().getAbsolutePath());
+          path = pathField.getText();
+      }
+    }
 
     if (path.equals("")){
       status.setText("Choose a file to convert.");
