@@ -20,7 +20,6 @@ class yaconverter{
         frame.setSize(550, 670);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         // Menu bar
         JMenuBar mb = new JMenuBar();
         JMenu m1 = new JMenu("About");
@@ -31,6 +30,7 @@ class yaconverter{
         JPanel statusBar = new JPanel();
 
         ImageIcon ic = new ImageIcon("raw\\logo.png");
+        frame.setIconImage(ic.getImage());
         JLabel label = new JLabel("File path: ");
         pathField = new JTextField(30);
         JButton browse = new JButton("Browse");
