@@ -18,13 +18,14 @@ class yaconverter{
   static JButton tobw, togs, browse;
   static JPanel imageViewer = new JPanel();
     public static void main(String[] args) {
+      // Theming
       try {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
       } catch(Exception looke) {
         System.out.println("Look and feel error.");
       }
 
-
+      // Frame settings
         frame.setSize(550, 670);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +41,7 @@ class yaconverter{
         ImageIcon ic = new ImageIcon("raw\\logo.png");
         frame.setIconImage(ic.getImage());
         JLabel label = new JLabel("File path: ");
-        pathField = new JTextField(30);
+        pathField = new JTextField(45);
         browse = new JButton("Browse");
         tobw = new JButton("Convert into B/W");
         togs = new JButton("Convert into GrayScale");
