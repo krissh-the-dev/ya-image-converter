@@ -18,6 +18,13 @@ class yaconverter{
   static JButton tobw, togs, browse;
   static JPanel imageViewer = new JPanel();
     public static void main(String[] args) {
+      try {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+      } catch(Exception looke) {
+        System.out.println("Look and feel error.");
+      }
+
+
         frame.setSize(550, 670);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
