@@ -20,8 +20,8 @@ public class toBW {
         graphic.dispose();
         // thanks to tutorialspoint for conversion algorithm
 
-        File output = new File(path + "-bw.jpeg");
-        ImageIO.write(result, "jpeg", output);
+        File output = new File(path + "-bw.jpg");
+        ImageIO.write(result, "jpg", output);
         return (output);
     } catch (IOException e) {
         e.printStackTrace();

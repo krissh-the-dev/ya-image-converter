@@ -109,11 +109,11 @@ class ButtonListener extends yaconverter implements ActionListener {
       BufferedImage image = ImageIO.read(new File(path));
       if (ae.getSource() == tobw) {
         op = toBW.convert(path);
-        conv = path + "-bw.jpeg";
+        conv = path + "-bw.jpg";
       }
       else if (ae.getSource() == togs) {
         op = toGrayscale.convert(path);
-        conv = path + "-grayscale.jpeg";
+        conv = path + "-grayscale.jpg";
       }
       else {}
 
@@ -124,7 +124,7 @@ class ButtonListener extends yaconverter implements ActionListener {
         img = new JLabel(new ImageIcon(new ImageIcon(conv).getImage().getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH)));
         imageViewer.add(img);
         frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
-        status.setText("Image saved as " + conv + ".");
+        status.setText("Image saved as " + conv);
       }
     } catch(javax.imageio.IIOException iioe) {
         status.setText("File not found.");

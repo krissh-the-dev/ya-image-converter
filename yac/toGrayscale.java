@@ -40,8 +40,8 @@ public class toGrayscale {
     // thanks to stackoverflow for image conversion algorithm
 
     try {
-      File gs = new File(path + "-grayscale.jpeg");
-      ImageIO.write(img, "jpeg", gs);
+      File gs = new File(path + "-grayscale.jpg");
+      ImageIO.write(img, "jpg", gs);
       return gs;
     } catch(IOException e){
       System.out.println(e);
