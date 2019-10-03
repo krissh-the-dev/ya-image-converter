@@ -14,13 +14,12 @@ class yaconverter{
   static JFrame frame = new JFrame("Ya Converter");
   static JTextField pathField;
   static JLabel status, img;
-  static JButton tobw, togs;
+  static JButton tobw, togs, browse;
   static JPanel imageViewer = new JPanel();
     public static void main(String[] args) {
         frame.setSize(550, 670);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         // Menu bar
         JMenuBar mb = new JMenuBar();
         JMenu m1 = new JMenu("About");
@@ -31,9 +30,10 @@ class yaconverter{
         JPanel statusBar = new JPanel();
 
         ImageIcon ic = new ImageIcon("raw\\logo.png");
+        frame.setIconImage(ic.getImage());
         JLabel label = new JLabel("File path: ");
         pathField = new JTextField(30);
-        JButton browse = new JButton("Browse");
+        browse = new JButton("Browse");
         tobw = new JButton("Convert into B/W");
         togs = new JButton("Convert into GrayScale");
 
@@ -100,12 +100,14 @@ class ButtonListener extends yaconverter implements ActionListener {
         conv = path + "-grayscale.jpeg";
         status.setText("Converted to grayscale.");
       }
+
       else {}
 
       if (op == null)
         status.setText("Error converting file.");
       else{
-        img = new JLabel(new ImageIcon(path));
+        imageViewer.remove(img);
+        img = new JLabel(new ImageIcon(conv));
         imageViewer.add(img);
         frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
         status.setText("Image saved as " + conv + ".");
