@@ -121,7 +121,7 @@ class ButtonListener extends yaconverter implements ActionListener {
         status.setText("File chosen successfully.");
       else{
         imageViewer.remove(img);
-        img = new JLabel(new ImageIcon(conv));
+        img = new JLabel(new ImageIcon(new ImageIcon(conv).getImage().getScaledInstance(img.getWidth(), img.getHeight(), Image.SCALE_SMOOTH)));
         imageViewer.add(img);
         frame.getContentPane().add(imageViewer, BorderLayout.NORTH);
         status.setText("Image saved as " + conv + ".");
