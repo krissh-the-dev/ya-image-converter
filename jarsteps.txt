@@ -1,5 +1,5 @@
 in manifest File
-Main-Class: yacalculator
+Main-Class: classname
 
 in cmd
 jar cfm Jarname.jar manifestname.txt classname.class
