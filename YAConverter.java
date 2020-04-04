@@ -1,10 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.filechooser.*;
-import javax.imageio.ImageIO;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.filechooser.FileSystemView;
+
 import yac.toBW;
 import yac.toGrayscale;
 
@@ -106,7 +119,6 @@ class ButtonListener extends YAConverter implements ActionListener {
     try {
       File op = null;
       String conv = "";
-      BufferedImage image = ImageIO.read(new File(path));
       if (ae.getSource() == tobw) {
         op = toBW.convert(path);
         conv = path + "-bw.jpeg";
